@@ -17,6 +17,20 @@ class ShoppingCart:
         else:
             print("\n無效的商品編號或商品已售完。")
 
+    def delete_to_cart(self, product_id):
+        # 檢查商品是否存在於購物車中
+        item_to_remove = None
+        for item in self.shopping_cart:
+            if item['id'] == product_id:
+                item_to_remove = item
+                break
+        
+        if item_to_remove:
+            self.shopping_cart.remove(item_to_remove)
+            print(f"\n{self.products[product_id]['name']} 已刪除購物車。")
+        else:
+            print("\n商品不在購物車內，無法刪除。")
+            
     def view_cart(self):
         if not self.shopping_cart:
             print("\n購物車是空的。")
@@ -59,10 +73,12 @@ if __name__ == '__main__':
       print("2. 顯示購物車內容")
       print("3. 付款")
       print("4. 離開")
-      print("5. 查看餘額")
+    #   print("5. 查看餘額")
+      print("5. 移除")
 
-      choice = input("\n請輸入選項 (1/2/3/4): ")
+      choice = input("\n請輸入選項 (1/2/3/4/5): ")
 
+        
       if choice == "1":
           product_id = int(input("\n請輸入要加入購物車的商品編號: "))
           cart.add_to_cart(product_id)
@@ -79,6 +95,10 @@ if __name__ == '__main__':
 
     #   elif choice == "5":
     #       cart.checkBalance()
-
+        
+      elif choice == "5":
+          delete_product_id = int(input("\n請輸入要刪除購物車的商品編號: "))
+          cart.delete_to_cart(delete_product_id)
+          
       else:
           print("\n無效的選項，請重新輸入。")
